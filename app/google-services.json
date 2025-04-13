@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "394385357446",
+    "project_id": "arjun90981",
+    "storage_bucket": "arjun90981.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394385357446:android:b117b1aebe9cb393992f07",
+        "android_client_info": {
+          "package_name": "com.example.loginscreenapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2w8Ch3UdhQ3I8hdUe0Lg9kw0i9TQYTAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

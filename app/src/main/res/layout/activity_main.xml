@@ -3,12 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_detail"
+
+
+        android:text="hello kandekar" >
+
+    </TextView>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:text="logout" />
 
 
 </LinearLayout>

@@ -2,9 +2,12 @@
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,46 +17,35 @@ import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 
  class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.secondacitivty)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.secee)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        val btn = findViewById<MaterialButton>(R.id.btn)
-      val  edtemailtxt = findViewById<EditText>(R.id.edt2)
-        val passwordtxt = findViewById<EditText>(R.id.edt3)
-        val auth = FirebaseAuth.getInstance()
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         enableEdgeToEdge()
+         setContentView(R.layout.activity_main)
+         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+             insets
+         }
+         val btn = findViewById<Button>(R.id.logout)
+         val txt = findViewById<TextView>(R.id.user_detail)
 
-        btn.setOnClickListener {
-            val email = edtemailtxt.text.toString()
-            val password = passwordtxt.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                Toast.makeText(applicationContext, "enter email and password", Toast.LENGTH_SHORT).show()
-            }
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
+         val auth = FirebaseAuth.getInstance()
+         var user = auth.currentUser
 
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(
-                            baseContext,
-                            "Authentication failed.",
-                            Toast.LENGTH_SHORT,
-                        ).show()
+         user = auth.currentUser
 
-                    }
-                }
-        }
+         if (user != null) {
+             val intent = Intent(applicationContext, Login::class.java)
+             startActivity(intent)
+         } else {
+             txt.text = user?.email ?: "No user"
+         }
+         btn.setOnClickListener {
+             auth.signOut()
+             val intent = Intent(applicationContext, Login::class.java)
+             startActivity(intent)
+             finish()
 
-
-    }
-}
+         }
+     }
+ }
